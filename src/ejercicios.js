@@ -7,7 +7,6 @@ export function soloPares(array) {
 }
 
 export function moverALaDerecha(array) {
-  //slice returns shallow copy
   return array.slice(-1).concat(array.slice(0,-1));
 }
 
@@ -28,18 +27,14 @@ export function soloVocales(array) {
 }
 
 export function todasVocalesIguales(array) {
-  return array.filter(x => {
-    if (/[aeiou]+/.test(x)){
+  return array.filter( x => { 
+    if ( /[aeiou]+/.test(x) ) {
       const vowels = x.match(/[aeiou]+/g);
       const uniqueVowels = new Set(vowels);
-      if (uniqueVowels.size > 1){
-        return false;
-      }
-      else {
-        return true;
-      }
-    } else { return true; }
-  })
+      return uniqueVowels.size > 1 ? false : true;
+    }
+    else { return true; }
+  });
 }
 
 export function duplicarMatriz(array) {
@@ -47,18 +42,13 @@ export function duplicarMatriz(array) {
 }
 
 export function mayoresDeEdadValidados(array) {
-  return array.map( x => {
-    const object = {...x};
-    object.mayor = (object.edad > 18);
-    return object;
-  });
+  return array.map(x =>
+    ({ ...x, mayor: (x.edad > 18) })
+  );
 }
 
 export function transformarObjetoEnArray(objeto) {
-  const keys = Object.keys(objeto);
-  return keys.map(key => {
-    const copyObjeto = {...objeto[key]};
-    copyObjeto.id = key;
-    return copyObjeto;
-  });
+  return Object.entries(objeto).map(([key, value]) =>
+    ({ id: key, ...value })
+  );
 }
